@@ -1,0 +1,25 @@
+﻿@using Task9.University.Infrastructure.Presentations;
+@model DeleteStudentViewModel
+
+@{
+    ViewData["Title"] = "Delete student";
+}
+
+<h2>Are you sure you want to delete this student?</h2>
+
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="FirstName">Student First Name</label>
+        <input asp-for="FirstName" class="form-control" placeholder="Title">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">Student Last Name</label>
+        <input asp-for="LastName" class="form-control" placeholder="Title">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id"/>
+    <input type="hidden" asp-for="GroupId" />
+    <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    <button type="button" onclick="history.go(-1)" class="btn btn-secondary mt-3">Back</button>
+</form>

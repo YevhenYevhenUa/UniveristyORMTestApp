@@ -1,0 +1,19 @@
+﻿@using Task9.University.Infrastructure.Presentations;
+@model CreateGroupViewModel
+
+@{
+    ViewData["Title"] = "Create group";
+}
+<h2>Create new group</h2>
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <input type="hidden" id="CourseId" name="CourseId" asp-for="CourseId" />
+    <div class="form-group">
+        <label asp-for="Name">Group Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" onclick="history.go(-1)" class="btn btn-secondary">Back</button>
+</form>

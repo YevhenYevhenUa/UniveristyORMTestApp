@@ -1,0 +1,27 @@
+﻿@using Task9.University.Domain.Core;
+@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">
+        <h2>Group-related students</h2>
+    </a>
+    <form class="form-inline">
+        <a asp-controller="Students" asp-action="Create" asp-route-id="@Model.FirstOrDefault().GroupId" type="button" class="btn btn-primary">Add new</a>
+        <button type="button" onclick="history.go(-1)" class="btn btn-secondary">Back</button>
+    </form>
+</nav>
+
+@if (Model.First().FirstName is not null)
+{
+    <h6>press on student to edit</h6>
+    @foreach (var item in Model)
+    {
+        <div class="list-group">
+            <a asp-controller="Students" asp-action="Edit" asp-route-id="@item.StudentId" type="button" class="list-group-item list-group-item-action">@item.FirstName, @item.LastName</a>
+        </div>
+    }
+}

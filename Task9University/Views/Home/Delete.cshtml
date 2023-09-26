@@ -1,0 +1,30 @@
+﻿@using Task9.University.Infrastructure.Presentations;
+@model DeleteCourseViewModel
+
+@{
+    ViewData["Title"] = "Delete course";
+}
+
+<h2>Are you sure you want to delete this course?</h2>
+
+@if (TempData["Error"] is not null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"]</span>
+    </div>
+}
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Course Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Title">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Course Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Title">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+    <button type="button" onclick="history.go(-1)" class="btn btn-secondary mt-3">Back</button>
+</form>

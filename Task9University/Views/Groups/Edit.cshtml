@@ -1,0 +1,19 @@
+﻿@using Task9.University.Infrastructure.Presentations;
+@model EditGroupViewModel
+
+@{
+    ViewData["Title"] = "Edit group";
+}
+
+<h2>Change group name</h2>
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Group Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Description">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input type="hidden" id="CourseeId" name="CourseId" asp-for="CourseId" />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" onclick="history.go(-1)" class="btn btn-secondary">Back</button>
+</form>

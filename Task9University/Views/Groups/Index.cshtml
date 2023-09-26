@@ -1,0 +1,33 @@
+﻿@using Task9.University.Domain.Core;
+@model IEnumerable<Group>
+
+@{
+    ViewData["Title"] = "Groups";
+}
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">
+        <h2>All course-related groups</h2>
+    </a>
+    <form class="form-inline">
+        <a asp-controller="Groups" asp-action="Create" asp-route-id="@Model.FirstOrDefault().CourseId" type="button" class="btn btn-primary">Add new</a>
+        <button type="button" onclick="history.go(-1)" class="btn btn-secondary">Back</button>
+    </form>
+</nav>
+
+@if (Model.First().Name is not null)
+{
+    @foreach (var item in Model)
+    {
+        <div class="card w-50">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <div class="btn-group">
+                    <a asp-controller="Students" asp-action="Index" asp-route-id="@item.GroupId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a asp-controller="Groups" asp-action="Edit" asp-route-id="@item.GroupId" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-controller="Groups" asp-action="Delete" asp-route-id="@item.GroupId" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+}

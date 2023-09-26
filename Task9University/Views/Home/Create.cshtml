@@ -1,0 +1,23 @@
+﻿@using Task9.University.Infrastructure.Presentations;
+@model CreateCourseViewModel
+
+@{
+    ViewData["Title"] = "Create course";
+}
+<h2>Create new course</h2>
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Course Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter course name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Course Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Enter Description">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" onclick="history.go(-1)" class="btn btn-secondary">Back</button>
+</form>
