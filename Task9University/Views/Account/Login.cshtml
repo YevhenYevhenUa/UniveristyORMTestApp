@@ -1,0 +1,28 @@
+﻿@using Task9.University.Infrastructure.Presentations.IdentityViewModels;
+@model LoginViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" method="post" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email address</label>
+        <input asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" id="exampleInputPassword1">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+   
+    <div class="mb-3 form-check">
+        <input asp-for="RememberMe" class="form-check-input" id="exampleCheck1">
+        <label asp-for="RememberMe" class="form-check-label">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

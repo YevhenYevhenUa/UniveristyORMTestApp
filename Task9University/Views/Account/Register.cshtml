@@ -1,0 +1,30 @@
+﻿@using Task9.University.Infrastructure.Presentations;
+@model RegisterViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-controller="Account" asp-action="Register" method="post" role="form">
+   <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email address</label>
+        <input asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" id="exampleInputPassword1">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ConfirmPassword" class="form-label">Confirm password</label>
+        <input asp-for="ConfirmPassword" class="form-control" id="exampleInputPassword1">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

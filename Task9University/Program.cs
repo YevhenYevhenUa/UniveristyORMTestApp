@@ -2,13 +2,26 @@ using Task9University.Middleware;
 using Task9.University.Infrastructure.Services;
 using Task9.University.Infrastructure.Data;
 using Task9University;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<OperationCancelledExceptionFilter>();
+});
+builder.Services.Configure<IdentityOptions>(options => 
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = true;
 });
 
 builder.Services.GetServiceDependencies();
@@ -29,6 +42,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 

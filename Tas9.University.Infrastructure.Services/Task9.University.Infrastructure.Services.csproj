@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.23" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Tas9.University.Services.Interfaces\Tas9.University.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Task9.University.Domain.Interfaces\Task9.University.Domain.Interfaces.csproj" />
   </ItemGroup>
