@@ -4,10 +4,14 @@ using Task9.University.Infrastructure.Data;
 using Task9University;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+{ 
+    options.SignIn.RequireConfirmedAccount = true; 
+})
     .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 // Add services to the container.
@@ -22,6 +26,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = true;
+});
+
+builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
+{
+    options.LoginPath = "/Account/Login";
 });
 
 builder.Services.GetServiceDependencies();
@@ -48,7 +57,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 
 app.Seed();

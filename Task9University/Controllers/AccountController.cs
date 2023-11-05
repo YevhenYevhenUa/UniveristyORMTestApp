@@ -37,7 +37,7 @@ public class AccountController : Controller
         returnUrl = returnUrl ?? Url.Content("~/");
         if (ModelState.IsValid)
         {
-            var user = new User { Email = registerVM.Email, UserName = registerVM.Email};
+            var user = new User { Email = registerVM.Email, UserName = registerVM.Email };
             var result = await _userManager.CreateAsync(user, registerVM.Password);
             if (result.Succeeded)
             {
@@ -64,9 +64,13 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var user = await _userManager.FindByEmailAsync(loginVM.Email);
-            var result = await _signInManager.PasswordSignInAsync(user.UserName, loginVM.Password, loginVM.RememberMe, false);
-            
+            if (user is null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid email or password!");
+                return View(loginVM);
+            }
 
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, loginVM.Password, loginVM.RememberMe, false);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");

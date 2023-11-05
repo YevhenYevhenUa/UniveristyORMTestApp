@@ -4,9 +4,11 @@ using Task9.University.Services.Interfaces;
 using Task9.University.Infrastructure.Presentations;
 using Task9University.Models;
 using Task9.University.Domain.Core;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Task9University.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     
