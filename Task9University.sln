@@ -9,21 +9,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task9.University.Tests", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3A35F018-1420-46EB-BF7E-A9BBD63A7057}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task9.University.Domain.Core", "Task9.University.Domain.Core\Task9.University.Domain.Core.csproj", "{6BA8D410-DABD-43CE-B118-D1B40934CDE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task9.University.Domain.Core", "Task9.University.Domain.Core\Task9.University.Domain.Core.csproj", "{6BA8D410-DABD-43CE-B118-D1B40934CDE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task9.University.Domain.Interfaces", "Task9.University.Domain.Interfaces\Task9.University.Domain.Interfaces.csproj", "{BC54BE1E-A870-4512-B758-EDFC166B60DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task9.University.Domain.Interfaces", "Task9.University.Domain.Interfaces\Task9.University.Domain.Interfaces.csproj", "{BC54BE1E-A870-4512-B758-EDFC166B60DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E256B8D6-2CF6-4225-BBFA-3C3B933A6940}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{86D9A73A-3187-4C6C-99B6-F041DB0AD8D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tas9.University.Services.Interfaces", "Tas9.University.Services.Interfaces\Tas9.University.Services.Interfaces.csproj", "{063E15F2-01DC-48CB-9B88-94A77E0FB130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tas9.University.Services.Interfaces", "Tas9.University.Services.Interfaces\Tas9.University.Services.Interfaces.csproj", "{063E15F2-01DC-48CB-9B88-94A77E0FB130}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task9.University.Infrastructure.Data", "Task9.University.Infrastructure.Data\Task9.University.Infrastructure.Data.csproj", "{8DC9D45E-E105-46C9-B108-91DC9C0D02F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task9.University.Infrastructure.Data", "Task9.University.Infrastructure.Data\Task9.University.Infrastructure.Data.csproj", "{8DC9D45E-E105-46C9-B108-91DC9C0D02F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task9.University.Infrastructure.Services", "Tas9.University.Infrastructure.Services\Task9.University.Infrastructure.Services.csproj", "{8596C11B-4188-4E4E-9CA7-6173F9C4CEA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task9.University.Infrastructure.Services", "Tas9.University.Infrastructure.Services\Task9.University.Infrastructure.Services.csproj", "{8596C11B-4188-4E4E-9CA7-6173F9C4CEA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task9.University.Infrastructure.Presentations", "Task9.University.Inftrastructure.Presentations\Task9.University.Infrastructure.Presentations.csproj", "{B0D82C41-C9C0-4B25-8206-ABA42CB0D976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task9.University.Infrastructure.Presentations", "Task9.University.Inftrastructure.Presentations\Task9.University.Infrastructure.Presentations.csproj", "{B0D82C41-C9C0-4B25-8206-ABA42CB0D976}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

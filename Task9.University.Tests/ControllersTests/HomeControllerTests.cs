@@ -28,7 +28,7 @@ public class HomeControllerTests
         _courseService.Setup(x => x.GetAllCourses(_cancellationToken)).ReturnsAsync(courses);
 
         //Act
-        var result = await _sut.Index(_cancellationToken);
+        var result = await _sut.Index(1, _cancellationToken);
 
         //Assert
         var viewResult = Assert.IsType<ViewResult>(result);
