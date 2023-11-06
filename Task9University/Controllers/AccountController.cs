@@ -25,6 +25,11 @@ public class AccountController : Controller
 
     public async Task<IActionResult> Register(string? returnUrl = null)
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            Response.Redirect("/");
+        }
+
         RegisterViewModel registerVM = new RegisterViewModel();
         registerVM.ReturnUrl = returnUrl;
         return View(registerVM);
@@ -52,6 +57,11 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Login(string? returnUrl = null)
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            Response.Redirect("/");
+        }
+
         LoginViewModel loginViewModel = new LoginViewModel();
         loginViewModel.ReturnUrl = returnUrl ?? Url.Content("~/");
         return View(loginViewModel);

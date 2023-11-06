@@ -1,38 +1,52 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Task9.University.Domain.Core;
+@using Task9University.Paging;
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model IEnumerable<Course>
+@model PaginatedList<Course>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 @*@if (SignInManager.IsSignedIn(User))*@
 
-    <nav class="navbar navbar-light bg-light justify-content-between">
-        <a class="navbar-brand">
-            <h2>All courses</h2>
-        </a>
-        <form class="form-inline">
-            <a asp-controller="Home" asp-action="Create" asp-route-id="@Model.FirstOrDefault().CourseId" type="button" class="btn btn-primary">Add new</a>
-        </form>
-    </nav>
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">
+        <h2>All courses</h2>
+    </a>
+    <form class="form-inline">
+        <a asp-controller="Home" asp-action="Create" asp-route-id="@Model.FirstOrDefault().CourseId" type="button" class="btn btn-primary">Add new</a>
+    </form>
+</nav>
 
-    @if (Model.FirstOrDefault().Name is not null)
+@if (Model.FirstOrDefault().Name is not null)
+{
+    @foreach (var item in Model)
     {
-        @foreach (var item in Model)
-        {
-            <div class="card w-100">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">@item.Description</p>
-                    <div class="btn-group">
-                        <a asp-controller="Groups" asp-action="Index" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                        <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                        <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
-                    </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                <div class="btn-group">
+                    <a asp-controller="Groups" asp-action="Index" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
                 </div>
             </div>
-        }
+        </div>
     }
+}
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">
+    Next
+</a>
+
 

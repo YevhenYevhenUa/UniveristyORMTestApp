@@ -5,13 +5,14 @@ using Task9.University.Infrastructure.Presentations;
 using Task9University.Models;
 using Task9.University.Domain.Core;
 using Microsoft.AspNetCore.Authorization;
+using Task9University.Paging;
 
 namespace Task9University.Controllers;
 
 [Authorize]
 public class HomeController : Controller
 {
-    
+
     private readonly ICourseService _courseService;
 
     public HomeController(ICourseService courseService)
@@ -19,10 +20,12 @@ public class HomeController : Controller
         _courseService = courseService;
     }
 
-    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    public async Task<IActionResult> Index(int? pageNumber, CancellationToken cancellationToken)
     {
+        int pageSize = 5;
         var courseList = await _courseService.GetAllCourses(cancellationToken);
-        return View(courseList);
+        var paginatedList = PaginatedList<Course>.Create(courseList.ToList(), pageNumber ?? 1, pageSize);
+        return View(paginatedList);
     }
 
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
@@ -72,15 +75,15 @@ public class HomeController : Controller
     public async Task<IActionResult> Delete(DeleteCourseViewModel courseVM, CancellationToken cancellationToken)
     {
 
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             ModelState.AddModelError("", "Failed to delete course");
             return View("Delete", courseVM);
         }
-        
+
         var course = await _courseService.DeleteCourse(courseVM, cancellationToken);
 
-        if(!course)
+        if (!course)
         {
             TempData["Error"] = "You can't delete a course if it doesn't have zero groups";
             return View(courseVM);
@@ -97,14 +100,14 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateCourseViewModel courseVM, CancellationToken cancellationToken)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             ModelState.AddModelError("", "Something went wrong while group");
             return View(courseVM);
         }
         var student = await _courseService.CreateNewCourse(courseVM, cancellationToken);
 
-        if(!student)
+        if (!student)
         {
             return View("Error");
         }

@@ -9,6 +9,8 @@
 
 <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" method="post" role="form">
     <div asp-validation-summary="All" class="text-danger"></div>
+    <h2>Welcome back!</h2>
+    <hr />
     <div class="mb-3">
         <label asp-for="Email" class="form-label">Email address</label>
         <input asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
