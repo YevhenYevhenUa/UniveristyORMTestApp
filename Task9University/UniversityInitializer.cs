@@ -1,4 +1,6 @@
-﻿using Task9.University.Domain.Core;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Net;
+using Task9.University.Domain.Core;
 using Task9.University.Infrastructure.Data;
 
 namespace Task9University;
@@ -42,6 +44,71 @@ public static class UniversityInitializer
             );
 
             context.SaveChanges();
+        }
+
+        return app;
+    }
+
+    public static async Task<WebApplication> SeedUsersAndRoles(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        using var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        using var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        using var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+        if (!await roleManager.RoleExistsAsync(UserRoles.SuperAdmin))
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.SuperAdmin));
+        if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+        if (!await roleManager.RoleExistsAsync(UserRoles.User))
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+
+        string superAdminEmail = "superadminemail@gmail.com";
+        string password = "uqywu@ioehui12gh4!";
+
+        var appSuperAdmin = await userManager.FindByEmailAsync(superAdminEmail);
+
+        if (appSuperAdmin == null)
+        {
+            var newAdminUser = new User()
+            {
+                Email = superAdminEmail,
+                UserName = superAdminEmail,
+            };
+
+            await userManager.CreateAsync(newAdminUser, password);
+            await userManager.AddToRoleAsync(newAdminUser, UserRoles.SuperAdmin);
+        }
+
+        string appAdminEmail = "adminemail@etickets.com";
+
+        var appAdmin = await userManager.FindByEmailAsync(appAdminEmail);
+        if (appAdmin == null)
+        {
+            var newAppUser = new User()
+            {
+                Email = appAdminEmail,
+                UserName = appAdminEmail,
+            };
+
+            await userManager.CreateAsync(newAppUser, password);
+            await userManager.AddToRoleAsync(newAppUser, UserRoles.Admin);
+        }
+
+        string appUserEmail = "useremail@etickets.com";
+
+        var appUser = await userManager.FindByEmailAsync(appUserEmail);
+        if (appUser == null)
+        {
+            var newAppUser = new User()
+            {
+                Email = appUserEmail,
+                UserName = appUserEmail
+            };
+
+            await userManager.CreateAsync(newAppUser, password);
+            await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
         }
 
         return app;

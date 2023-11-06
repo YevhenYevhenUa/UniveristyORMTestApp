@@ -28,6 +28,7 @@ public class StudentsController : Controller
         return View(studentList);
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
         var student = await _studentServices.EditStudentView(id, cancellationToken);
@@ -40,6 +41,7 @@ public class StudentsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Edit(EditStudentViewModel studentVM, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
@@ -59,6 +61,7 @@ public class StudentsController : Controller
         }
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         var student = await _studentServices.DeleteStudentView(id, cancellationToken);
@@ -71,6 +74,7 @@ public class StudentsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Delete(DeleteStudentViewModel studentVM, CancellationToken cancellationToken)
     {
         var student = await _studentServices.DeleteStudent(studentVM, cancellationToken);
@@ -89,6 +93,7 @@ public class StudentsController : Controller
 
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
     {
         var studentVM = await _studentServices.CreateStudentView(id, cancellationToken);
@@ -101,6 +106,7 @@ public class StudentsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Create(CreateStudentViewModel studentVM, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)

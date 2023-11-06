@@ -10,15 +10,23 @@ public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
     public AccountController(UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager)
+        SignInManager<IdentityUser> signInManager,
+        RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _roleManager = roleManager;
     }
 
     public IActionResult Idenx()
+    {
+        return View();
+    }
+
+    public IActionResult AccountPage()
     {
         return View();
     }
@@ -44,7 +52,8 @@ public class AccountController : Controller
         {
             var user = new User { Email = registerVM.Email, UserName = registerVM.Email };
             var result = await _userManager.CreateAsync(user, registerVM.Password);
-            if (result.Succeeded)
+            var roleResult = await _userManager.AddToRoleAsync(user, registerVM.Role);
+            if (result.Succeeded && roleResult.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return LocalRedirect(returnUrl);

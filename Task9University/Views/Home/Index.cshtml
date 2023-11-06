@@ -8,16 +8,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*@if (SignInManager.IsSignedIn(User))*@
-
-<nav class="navbar navbar-light bg-light justify-content-between">
-    <a class="navbar-brand">
-        <h2>All courses</h2>
-    </a>
-    <form class="form-inline">
-        <a asp-controller="Home" asp-action="Create" asp-route-id="@Model.FirstOrDefault().CourseId" type="button" class="btn btn-primary">Add new</a>
-    </form>
-</nav>
+@if (!User.IsInRole("user"))
+{
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">
+            <h2>All courses</h2>
+        </a>
+        <form class="form-inline">
+            <a asp-controller="Home" asp-action="Create" asp-route-id="@Model.FirstOrDefault().CourseId" type="button" class="btn btn-primary">Add new</a>
+        </form>
+    </nav>
+}
 
 @if (Model.FirstOrDefault().Name is not null)
 {
@@ -29,8 +30,12 @@
                 <p class="card-text">@item.Description</p>
                 <div class="btn-group">
                     <a asp-controller="Groups" asp-action="Index" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                    @if (!User.IsInRole("user"))
+                    {
+                        <a asp-controller="Home" asp-action="Edit" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                        <a asp-controller="Home" asp-action="Delete" asp-route-id="@item.CourseId" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+                    }
+
                 </div>
             </div>
         </div>

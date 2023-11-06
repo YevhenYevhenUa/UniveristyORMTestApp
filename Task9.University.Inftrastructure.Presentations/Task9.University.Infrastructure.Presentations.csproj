@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.23" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Task9.University.Domain.Core\Task9.University.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>

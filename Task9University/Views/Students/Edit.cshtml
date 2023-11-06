@@ -20,6 +20,6 @@
     </div>
     <input type="hidden" id="GroupId" name="GroupId" asp-for="GroupId" />
     <button type="submit" class="btn btn-primary">Submit</button>
-    <a asp-controller="Students" asp-action="Delete" asp-route-id="@Model.Id" type="button" class="btn btn-outline-secondary">Delete</a>
+    <a asp-controller="Students" asp-action="Delete" asp-route-id="@Model.Id" type="button" class="btn btn-danger">Delete</a>
     <button type="button" onclick="history.go(-1)" class="btn btn-secondary">Back</button>
 </form>

@@ -28,6 +28,7 @@ public class HomeController : Controller
         return View(paginatedList);
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
         var CourseVM = await _courseService.EditCourseView(id, cancellationToken);
@@ -41,6 +42,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Edit(EditCourseViewModel courseVM, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
@@ -58,6 +60,7 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         var courseVM = await _courseService.DeleteCourseView(id, cancellationToken);
@@ -72,6 +75,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Delete(DeleteCourseViewModel courseVM, CancellationToken cancellationToken)
     {
 
@@ -92,12 +96,15 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Home");
 
     }
+
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Create()
     {
         return View("Create");
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Create(CreateCourseViewModel courseVM, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)

@@ -27,6 +27,7 @@ public class GroupsController : Controller
         return View(group);
     }
 
+    [Authorize(Roles ="superAdmin, admin")]
     public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
     {
         var groupVM = await _groupService.EditGroupView(id, cancellationToken);
@@ -39,6 +40,7 @@ public class GroupsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Edit(EditGroupViewModel groupVM, CancellationToken cancellationToken)
     {
         if(!ModelState.IsValid)
@@ -56,6 +58,7 @@ public class GroupsController : Controller
         return RedirectToRoute("Default", new { Controller = "Groups", Action = "Index", id = groupVM.CourseId });
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
     {
         var group = await _groupService.DeleteGroupView(id, cancellationToken);
@@ -68,6 +71,7 @@ public class GroupsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Delete(DeleteGroupViewModel groupVM, CancellationToken cancellationToken)
     {
         var group = await _groupService.GroupDelete(groupVM, cancellationToken);
@@ -86,6 +90,7 @@ public class GroupsController : Controller
         return RedirectToRoute("Default", new { Controller = "Groups", Action = "Index", id = groupVM.CourseId });
     }
 
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
     {
         var groupVM = await _groupService.CreateGroupView(id, cancellationToken);
@@ -98,6 +103,7 @@ public class GroupsController : Controller
     }
 
     [HttpPost]
+    [Authorize(Roles = "superAdmin, admin")]
     public async Task<IActionResult> Create(CreateGroupViewModel groupVM, CancellationToken cancellationToken)
     {
         if(!ModelState.IsValid)

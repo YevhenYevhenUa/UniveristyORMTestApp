@@ -7,7 +7,7 @@
 }
 
 <form asp-controller="Account" asp-action="Register" method="post" role="form">
-   <div asp-validation-summary="All" class="text-danger"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <h2>Create a new account.</h2>
     <hr />
     <div class="mb-3">
@@ -26,6 +26,7 @@
         <input asp-for="ConfirmPassword" class="form-control" id="exampleInputPassword1">
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
+    <input type="hidden" asp-for="Role" name="Role" />
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
